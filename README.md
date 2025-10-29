@@ -6,8 +6,7 @@ O diretório principal de desenvolvimento é **front-fabrica**, que contém o c�
 ## Tecnologias Utilizadas  
 - HTML / CSS / JavaScript  
 - TypeScript (se aplicável — conforme o pacote `package.json`)  
-- Framework/biblioteca frontend: (especifique, ex: React, Vue, Svelte — conforme consta no `package.json`)  
-- Outros (adicione libs ou ferramentas que você usar)  
+- Framework/biblioteca frontend: React
 
 ## Instalação e Execução  
 Para executar localmente:  
