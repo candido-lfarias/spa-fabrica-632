@@ -49,10 +49,3 @@ No diretório `front-fabrica`, os principais comandos são:
 * `npm run dev` — executa o frontend em modo de desenvolvimento.
 * `npm run build` — gera os arquivos de produção (se configurado)
 * `npm run lint` — executa verificação de estilo/código (se configurado)
-* (adicione outros scripts que existirem)
-
----
-
-Se quiser, posso gerar também **badges** (por exemplo de versão, build, licença) e uma versão em português mais detalhada com screenshots e guia para produção. Você gostaria que eu fizesse isto?
-::contentReference[oaicite:1]{index=1}
-```
