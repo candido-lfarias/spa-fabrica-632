@@ -10,7 +10,6 @@ body {
   width: 100vw;
 }
 
-/* Lado esquerdo - formulário */
 .login-section {
   flex: 1;
   background-color: #fdf6ed;
@@ -100,7 +99,6 @@ button:hover {
   transform: translateY(-2px);
 }
 
-/* Lado direito - imagem */
 .image-section {
   flex: 0 0 40%;      
   max-width: 40%;
@@ -198,5 +196,3 @@ button:hover {
     width: 80%;
   }
 }
-
-/* Add viewport meta tag to your HTML file head */
