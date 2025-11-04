@@ -118,3 +118,85 @@ button:hover {
   object-fit: cover;
   border-radius: 0 20px 20px 0;
 }
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  .title {
+    font-size: 50px;
+  }
+
+  .subtitle {
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .login-section {
+    padding: 20px;
+    order: 2;
+    min-height: 100vh;
+  }
+
+  .image-section {
+    flex: 0 0 30vh;
+    max-width: 100%;
+    order: 1;
+    height: 30vh;
+  }
+
+  .image-section img {
+    border-radius: 0 0 20px 20px;
+  }
+
+  .title {
+    font-size: 40px;
+    margin-top: 20px;
+  }
+
+  .subtitle {
+    font-size: 20px;
+  }
+
+  .login-form {
+    max-width: 100%;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .login-section {
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+  }
+
+  .slogan {
+    font-size: 12px;
+  }
+
+  .image-section {
+    flex: 0 0 25vh;
+    height: 25vh;
+  }
+
+  .login-form input,
+  .login-form button {
+    padding: 8px;
+  }
+
+  .divider {
+    width: 80%;
+  }
+}
+
+/* Add viewport meta tag to your HTML file head */
