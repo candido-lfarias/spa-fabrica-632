@@ -16,6 +16,7 @@ export default function Home() {
           <li><a href="/clientes">Clientes</a></li>
           <li><a href="/fornecedores">Fornecedores</a></li>
           <li><a href="/produtos">Produtos</a></li>
+          <li><a href="/insumos">Insumos</a></li>
         </ul>
       </div>
 
