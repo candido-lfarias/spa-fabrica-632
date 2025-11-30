@@ -1,68 +1,88 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* ===== Reset mínimo */
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body { margin: 0; }
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ===== Tema Café */
+:root{
+  --coffee-900:#492F2E;   /* marrom escuro (botões/acentos) */
+  --coffee-700:#8d5e3c;   /* hover/destaques */
+  --header-ocre:#BB926D;  /* faixa do header */
+  --bg-page:#f4f1e1;      /* fundo da página */
+  --stat-bg:#f5e1a4;      /* cartões de métricas (se usar) */
+  --text-dark:#341C1B;
+  --white:#fff;
+  --radius:12px;
+  --shadow:0 6px 18px rgba(0,0,0,.08);
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* ===== Base da página */
+body{
+  background: var(--bg-page);
+  color: #2b2520;
+  font-family: system-ui, Inter, Segoe UI, Roboto, Arial, sans-serif;
+  line-height: 1.45;
 }
 
-body {
-  margin: 0;
+/* O root deve ocupar toda a largura (nada de centralizar como no template do Vite) */
+#root{
+  width: 100%;
+  min-height: 100%;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  flex-direction: column;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* ===== Links e botões simples (sem o azul do template) */
+a{ color: inherit; text-decoration: none; }
+button{
+  border: 0; cursor: pointer; border-radius: 10px;
+  padding: 10px 14px; font-weight: 700;
+}
+.btn{ border:0; cursor:pointer; padding:10px 14px; border-radius: 10px; font-weight: 700; }
+.btn--primary{ background: var(--coffee-900); color: var(--white); }
+.btn--ghost{ background: transparent; border: 1px solid #d9c7b6; color: var(--coffee-900); }
+.btn--danger{ background: #c4432b; color: #fff; }
+
+/* ===== Layout de páginas */
+.page{ padding: 18px 24px; }
+.card{ background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; }
+
+/* Header (faixa ocre) ocupando 100% da largura */
+.page-hero{
+  margin: 0;                 /* sem margem para sangrar */
+  border-radius: 0;          /* colado na lateral */
+  background: var(--header-ocre);
+  color: var(--text-dark);
+  padding: 16px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.page-hero__title{ font-weight: 800; letter-spacing: .4px; }
+
+/* Filtros */
+.filters{ display:flex; gap:12px; flex-wrap:wrap; padding:14px 0; }
+.filters input, .filters select{
+  padding:10px 12px; border:1px solid #e6d9cc; border-radius:10px; background:#fff;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+/* Tabela */
+.table-wrapper{ width:100%; overflow:auto; }
+.table{ width:100%; border-collapse:separate; border-spacing:0 8px; }
+.table thead th{ text-align:left; padding:10px 12px; color:#5a4639; }
+.table tbody tr{ background:#fff; }
+.table tbody td{ padding:12px; border-top:1px solid #efe2d5; border-bottom:1px solid #efe2d5; }
+.table tbody tr td:first-child{ border-left:1px solid #efe2d5; border-top-left-radius:10px; border-bottom-left-radius:10px; }
+.table tbody tr td:last-child{ border-right:1px solid #efe2d5; border-top-right-radius:10px; border-bottom-right-radius:10px; }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
+/* Estados */
+.empty{ padding:18px; color:#7a6a5f; }
+.alert{ padding:12px 14px; border-radius:10px; margin:12px 0; }
+.alert--error{ background:#ffeceb; color:#91271d; border:1px solid #ffd4cf; }
+
+/* Formulário */
+fieldset{ border:0; margin:0; }
+legend{ font-weight:800; color:#5a4639; margin:6px 0 10px; }
+.form-grid{ display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+label{ display:flex; flex-direction:column; gap:6px; }
+input, select{ padding:10px 12px; border:1px solid #e6d9cc; border-radius:10px; background:#fff; }
+.form-error{ color:#a12a1a; }
+.form__actions{ display:flex; justify-content:flex-end; gap:8px; margin-top:10px; }

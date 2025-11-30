@@ -1,0 +1,75 @@
+:root{
+  --coffee-900: #492F2E; /* sidebar / marrom escuro */
+  --coffee-700: #8d5e3c; /* hover links / destaques */
+  --header-ocre: #BB926D; /* faixa do header das páginas */
+  --bg-page: #f4f1e1;     /* fundo main */
+  --stat-bg: #f5e1a4;     /* cartões de stats */
+  --text-dark: #341C1B;   /* texto escuro do header */
+  --white: #ffffff;
+  --radius: 12px;
+  --shadow: 0 6px 18px rgba(0,0,0,.08);
+}
+
+/* wrapper para páginas internas (dentro de .main-content) */
+.page{
+  padding: 20px;
+}
+
+/* faixa ocre (título da página + CTA à direita) */
+.page-hero{
+  background: var(--header-ocre);
+  color: var(--text-dark);
+  padding: 14px 18px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-radius: var(--radius);
+  margin: 10px 20px;
+}
+.page-hero__title{ font-weight: 800; letter-spacing: .4px; }
+
+/* cartões / áreas brancas */
+.card{
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* filtros simples */
+.filters{
+  display: flex; gap: 12px; flex-wrap: wrap;
+  padding: 14px 16px;
+}
+.filters input, .filters select{
+  padding: 10px 12px;
+  border: 1px solid #e6d9cc;
+  border-radius: 10px;
+  background: #fff;
+}
+
+/* tabela */
+.table-wrapper{ padding: 0 16px 16px; }
+.table{ width: 100%; border-collapse: separate; border-spacing: 0 8px; }
+.table thead th{ text-align: left; padding: 10px 12px; color: #5a4639; }
+.table tbody tr{ background: #fff; }
+.table tbody td{ padding: 12px; border-top:1px solid #efe2d5; border-bottom:1px solid #efe2d5; }
+.table tbody tr td:first-child{ border-left:1px solid #efe2d5; border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
+.table tbody tr td:last-child{ border-right:1px solid #efe2d5; border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
+
+/* botões */
+.btn{ border:0; cursor:pointer; padding:10px 14px; border-radius: 10px; font-weight: 700; }
+.btn--primary{ background: var(--coffee-900); color: var(--white); }
+.btn--ghost{ background: transparent; border: 1px solid #d9c7b6; color: var(--coffee-900); }
+.btn--danger{ background: #c4432b; color: #fff; }
+
+/* estados */
+.empty{ padding: 18px; color: #7a6a5f; }
+.alert{ padding: 12px 14px; border-radius: 10px; margin: 12px 16px; }
+.alert--error{ background:#ffeceb; color:#91271d; border:1px solid #ffd4cf; }
+
+/* formulário */
+fieldset{ border:0; margin:0; padding: 16px; }
+legend{ font-weight: 800; color:#5a4639; margin-bottom: 8px; }
+.form-grid{ display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); }
+label{ display:flex; flex-direction:column; gap:6px; }
+input, select{ padding:10px 12px; border:1px solid #e6d9cc; border-radius:10px; background:#fff; }
+.form-error{ color:#a12a1a; }
+.form__actions{ padding: 0 16px 16px; display:flex; justify-content:flex-end; gap:8px; }
