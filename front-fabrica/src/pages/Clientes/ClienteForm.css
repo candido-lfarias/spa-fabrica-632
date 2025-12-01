@@ -1,0 +1,178 @@
+.client-form-wrap {
+    max-width: 980px;
+    margin: 24px auto 60px;
+    padding: 0 16px;
+}
+
+.btn-page {
+    border: none;
+    background: var(--accent);
+    color: #1f140f;
+    padding: 8px 12px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+}
+
+.grid {
+    display: grid;
+    gap: 18px;
+    margin-top: 16px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 18px;
+}
+
+.card h3 {
+    margin: 0 0 12px;
+    color: var(--primary);
+    font-size: 18px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.row.two .field { 
+    flex: 1 1 260px; 
+}
+
+.field {
+    display: grid;
+    gap: 6px;
+    min-width: 220px;
+    flex: 1;
+}
+
+.field label {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.field input, .field select {
+    height: 42px;
+    padding: 0 12px;
+    border-radius: 10px;
+    border: 1px solid #e5d8c7;
+    outline: none;
+}
+
+.radio {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--primary-700);
+}
+
+.status {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status .status-pills {
+    display: flex;
+    gap: 8px;
+}
+.pill {
+    border: 1px solid #ead8bf;
+    background: #fff;
+    color: var(--primary-700);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.pill.on   { 
+    background: rgba(42,167,68,.12); color: var(--success); 
+    border-color: rgba(42,167,68,.25); 
+}
+
+.pill.off  { 
+    background: rgba(217,83,79,.12);
+    color: var(--danger);  
+    border-color: rgba(217,83,79,.25); 
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 6px;
+}
+
+.btn.danger {
+    background: var(--danger);
+    color: #fff;
+}
+.btn.primary {
+    background: var(--accent);
+    color: #1f140f;
+}
+.btn.ghost {
+    background: #fff;
+    color: var(--primary-700);
+    border: 1px solid #ead8bf;
+}
+
+.error {
+    color: var(--danger);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.client-form-wrap .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+.client-form-wrap .actions .btn {
+    min-width: 160px;
+    height: 44px;
+    line-height: 44px;
+    padding: 0 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    box-shadow: var(--shadow);
+}
+
+.client-form-wrap .actions .btn.danger { 
+    background: var(--danger); 
+    color: #fff; 
+}
+.client-form-wrap .actions .btn.primary { 
+    background: var(--accent); 
+    color: #1f140f; 
+}
+
+.client-form-wrap .actions .btn.ghost    { 
+    background: #fff; 
+    color: var(--primary-700); 
+    border: 1px solid #ead8bf;
+}
+
+
+@media (max-width: 640px) {
+  .status { 
+        width: 100%; 
+        justify-content: space-between; 
+        margin: 8px 0 0; 
+    }
+}

@@ -7,13 +7,13 @@ export default function Home() {
       {/* Sidebar */}
       <div className="sidebar">
         <div className="sidebar-logo">
-          <img src="../assets/logo.png" alt="Logo Café" className="logo" />
+          <img src="../src/assets/logo.png" alt="Logo Café" className="logo" />
         </div>
         <ul className="sidebar-menu">
           <li><a href="/home">Home</a></li>
           <li><a href="/compras">Compras</a></li>
           <li><a href="/vendas">Vendas</a></li>
-          <li><a href="/clientes">Clientes</a></li>
+          <li><a href="/clients">Clientes</a></li>
           <li><a href="/fornecedores">Fornecedores</a></li>
           <li><a href="/produtos">Produtos</a></li>
         </ul>
