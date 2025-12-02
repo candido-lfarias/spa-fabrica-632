@@ -1,0 +1,27 @@
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d9b98f;
+  color: #4a2c1a;
+  padding: 20px 40px;
+  width: 100%;
+}
+
+.home-header h1 {
+  font-family: "Lilita One", sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+  color: #4a2c1a;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .home-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+}
+

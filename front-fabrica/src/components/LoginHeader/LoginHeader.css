@@ -1,0 +1,99 @@
+.title {
+  font-size: 70px;
+  font-weight: 800;
+  margin-bottom: 0;
+}
+
+.subtitle {
+  font-size: 32px;
+  font-weight: 700;
+  margin-top: 0;
+}
+
+.slogan {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.divider {
+  width: 60%;
+  height: 2px;
+  background-color: #4a2c1a;
+  border: none;
+  margin: 20px 0;
+}
+
+/* Tablet Responsiveness */
+@media (max-width: 1024px) {
+  .title {
+    font-size: 56px;
+  }
+
+  .subtitle {
+    font-size: 28px;
+  }
+}
+
+/* Mobile and Small Tablet Responsiveness */
+@media (max-width: 768px) {
+  .title {
+    font-size: 48px;
+  }
+
+  .subtitle {
+    font-size: 24px;
+  }
+
+  .slogan {
+    font-size: 12px;
+  }
+
+  .divider {
+    width: 80%;
+    margin: 15px 0;
+  }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+  .title {
+    font-size: 36px;
+  }
+
+  .subtitle {
+    font-size: 20px;
+  }
+
+  .slogan {
+    font-size: 11px;
+    margin-bottom: 15px;
+  }
+
+  .divider {
+    width: 90%;
+    margin: 10px 0;
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 360px) {
+  .title {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+  }
+}
+
+/* Landscape orientation on mobile devices */
+@media (max-width: 768px) and (orientation: landscape) {
+  .title {
+    font-size: 40px;
+  }
+
+  .subtitle {
+    font-size: 20px;
+  }
+}
+
