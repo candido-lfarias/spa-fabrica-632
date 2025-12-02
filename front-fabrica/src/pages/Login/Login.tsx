@@ -1,32 +1,25 @@
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
-import cafeImage from '../../assets/cafe.png';
+import LoginHeader from '../../components/LoginHeader/LoginHeader';
+import LoginForm from '../../components/LoginForm/LoginForm';
+import LoginImageSection from '../../components/LoginImageSection/LoginImageSection';
 
 export default function Login() {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    navigate('/');
+  };
+
   return (
     <div className="container">
       <div className="login-section">
-        <h1 className="title">CAFÉ</h1>
-        <h2 className="subtitle">AU CARAMELO</h2>
-        <p className="slogan">UM CAFÉ GOSTOSO PRA CACHORRO!</p>
-
-        <hr className="divider" />
-
-        <form className="login-form">
-          <label htmlFor="email">Nome de usuário</label>
-          <input type="email" id="email" placeholder="Seu email" />
-
-          <label htmlFor="password">Senha</label>
-          <input type="password" id="password" placeholder="Sua senha" />
-
-          <a href="#" className="forgot">Esqueceu sua senha?</a>
-
-          <button type="submit">LOGIN</button>
-        </form>
+        <LoginHeader />
+        <LoginForm onSubmit={handleSubmit} />
       </div>
 
-      <div className="image-section">
-        <img src={cafeImage} alt="Café au Caramelo" />
-      </div>
+      <LoginImageSection />
     </div>
   );
 }

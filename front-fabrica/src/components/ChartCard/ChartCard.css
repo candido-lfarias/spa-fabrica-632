@@ -1,0 +1,41 @@
+.chart-card {
+  background-color: #f5e1a4;
+  padding: 25px;
+  border-radius: 8px;
+  border: 1px solid #d9b98f;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.chart-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #4a2c1a;
+  margin: 0;
+}
+
+.chart-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #8d5e3c;
+}
+
+.trend-indicator {
+  font-size: 12px;
+  color: #4a2c1a;
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.chart-container {
+  height: 200px;
+  display: flex;
+  align-items: flex-end;
+  padding: 10px 0;
+}
+

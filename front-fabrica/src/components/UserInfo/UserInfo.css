@@ -1,0 +1,43 @@
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.user-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #4a2c1a;
+}
+
+.user-email {
+  font-size: 14px;
+  color: #4a2c1a;
+}
+
+.user-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #4a2c1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5e1a4;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .user-info {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+

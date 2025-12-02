@@ -1,0 +1,52 @@
+.metric-card {
+  background-color: #f5e1a4;
+  padding: 20px 30px;
+  border-radius: 8px;
+  border: 1px solid #d9b98f;
+  min-width: 200px;
+  text-align: center;
+}
+
+.metric-value {
+  font-size: 32px;
+  font-weight: bold;
+  color: #4a2c1a;
+  margin-bottom: 5px;
+}
+
+.metric-label {
+  font-size: 14px;
+  color: #8d5e3c;
+}
+
+.risk-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.risk-header {
+  margin-bottom: 10px;
+}
+
+.risk-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #4a2c1a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.risk-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.risk-value {
+  font-size: 18px;
+  font-weight: bold;
+  color: #4a2c1a;
+}
+
