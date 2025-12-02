@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './UserManagement.css';
 import '../../App.css';
 import logoImage from '../../assets/logo.png';
@@ -12,6 +13,7 @@ interface User {
 }
 
 export default function UserManagement() {
+  const navigate = useNavigate();
   const [users] = useState<User[]>([
     { id: 1, nome: 'Nome usuário', email: 'emaildousuario@gmail.com', cargo: 'Funcionário', status: 'ativo' },
     { id: 2, nome: 'Nome usuário', email: 'emaildousuario@gmail.com', cargo: 'Funcionário', status: 'inativo' },
@@ -66,7 +68,9 @@ export default function UserManagement() {
 
         <div className="user-management-content">
           <div className="action-bar">
-            <button className="btn-create-user">CRIAR NOVO USUÁRIO</button>
+            <button className="btn-create-user" onClick={() => navigate('/producao/criar-usuario')}>
+              CRIAR NOVO USUÁRIO
+            </button>
             <div className="search-container">
               <svg className="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z" stroke="#492F2E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
