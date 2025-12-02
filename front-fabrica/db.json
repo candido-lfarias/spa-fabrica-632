@@ -1,0 +1,28 @@
+{
+  "clients": [
+    {
+      "id": 1,
+      "tipo": "PJ",
+      "status": "Ativo",
+      "nome": "Empresa de Teste Alfa",
+      "cnpj": "11.222.333/0001-44",
+      "email": "contato@alfa.com",
+      "telefone": "11 99999-8888",
+      "endereco": "Rua dos Testes, 123",
+      "cep": "01234-567",
+      "credito": "10000"
+    },
+    {
+      "id": 2,
+      "tipo": "PF",
+      "status": "Inativo",
+      "nome": "Fulano de Tal",
+      "cpf": "123.456.789-00",
+      "email": "fulano.tal@email.com",
+      "telefone": "21 98765-4321",
+      "endereco": "Avenida Brasil, 456",
+      "cep": "23456-789",
+      "credito": "500"
+    }
+  ]
+}

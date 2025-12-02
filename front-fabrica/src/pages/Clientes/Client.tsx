@@ -1,3 +1,5 @@
+// src/pages/Clientes/Client.tsx
+
 import React, { useEffect, useMemo, useState } from "react";
 import logo from "../../assets/logo.png";
 import "../Home/Home.css";
@@ -5,46 +7,11 @@ import "./ClientList.css";
 import "./ClienteForm.css";
 import "./ClientDeleteModal.css";
 
-type TipoCliente = "PF" | "PJ";
-type StatusCliente = "Ativo" | "Inativo";
+// --- IMPORTAÇÕES DA API ---
+import { getClients, createClient, updateClient, deleteClient } from "../../services/clientService";
+import { type Client as Cliente } from "../../types/client"; // Renomeando para 'Cliente' para bater com o código existente
 
-interface Cliente {
-  id: number;
-  tipo: TipoCliente;
-  status: StatusCliente;
-  nome: string;
-  cnpj?: string;
-  cpf?: string;
-  email: string;
-  telefone?: string;
-  endereco?: string;
-  cep?: string;
-  credito?: string;
-}
-
-const initialClientes: Cliente[] = [
-  {
-    id: 1,
-    tipo: "PJ",
-    status: "Ativo",
-    nome: "EMPRESA RIO LTDA.",
-    cnpj: "00.000.000/0000-00",
-    email: "empresarioclientes@gmail.com",
-    telefone: "43 99876-0000",
-    endereco: "Rua Júlio, 123, Bairro Tiradentes",
-    cep: "87650-000",
-    credito: "2.000.000,00",
-  },
-  {
-    id: 2,
-    tipo: "PJ",
-    status: "Inativo",
-    nome: "EMPRESA SP LTDA.",
-    cnpj: "04.003.000/0020-00",
-    email: "empresaspoffc@gmail.com",
-    credito: "500.000,00",
-  },
-];
+// --- COMPONENTES INTERNOS ---
 
 const ModalConfirmacao: React.FC<{
   isOpen: boolean;
@@ -128,58 +95,33 @@ const FormCliente: React.FC<{
       </div>
 
       <form className="grid" onSubmit={(e) => e.preventDefault()}>
+        {/* --- DADOS PESSOAIS --- */}
         <section className="card">
           <h3>Dados Pessoais</h3>
           <div className="row">
             <label className="radio">
-              <input
-                type="radio"
-                checked={form.tipo === "PF"}
-                onChange={() => set("tipo", "PF")}
-              />
+              <input type="radio" checked={form.tipo === "PF"} onChange={() => set("tipo", "PF")} />
               Pessoa Física
             </label>
             <label className="radio">
-              <input
-                type="radio"
-                checked={form.tipo === "PJ"}
-                onChange={() => set("tipo", "PJ")}
-              />
+              <input type="radio" checked={form.tipo === "PJ"} onChange={() => set("tipo", "PJ")} />
               Pessoa Jurídica
             </label>
-
             <div className="status">
               <span>Status</span>
               <div className="status-pills">
-                <button
-                  type="button"
-                  className={`pill ${form.status === "Ativo" ? "on" : ""}`}
-                  onClick={() => set("status", "Ativo")}
-                >
-                  Ativo
-                </button>
-                <button
-                  type="button"
-                  className={`pill ${form.status === "Inativo" ? "off" : ""}`}
-                  onClick={() => set("status", "Inativo")}
-                >
-                  Inativo
-                </button>
+                <button type="button" className={`pill ${form.status === "Ativo" ? "on" : ""}`} onClick={() => set("status", "Ativo")}>Ativo</button>
+                <button type="button" className={`pill ${form.status === "Inativo" ? "off" : ""}`} onClick={() => set("status", "Inativo")}>Inativo</button>
               </div>
             </div>
           </div>
-
           <div className="row">
             <div className="field">
               <label>Nome Completo / Razão Social *</label>
-              <input
-                value={form.nome}
-                onChange={(e) => set("nome", e.target.value)}
-              />
+              <input value={form.nome} onChange={(e) => set("nome", e.target.value)} />
               {erros.nome && <small className="error">{erros.nome}</small>}
             </div>
           </div>
-
           <div className="row two">
             {form.tipo === "PJ" ? (
               <div className="field">
@@ -197,16 +139,13 @@ const FormCliente: React.FC<{
           </div>
         </section>
 
+        {/* --- CONTATOS (PARTE QUE FALTAVA) --- */}
         <section className="card">
           <h3>Contatos</h3>
           <div className="row">
             <div className="field">
               <label>Email *</label>
-              <input
-                type="email"
-                value={form.email}
-                onChange={(e) => set("email", e.target.value)}
-              />
+              <input type="email" value={form.email} onChange={(e) => set("email", e.target.value)} />
               {erros.email && <small className="error">{erros.email}</small>}
             </div>
           </div>
@@ -228,6 +167,7 @@ const FormCliente: React.FC<{
           </div>
         </section>
 
+        {/* --- INFORMAÇÕES FINANCEIRAS (PARTE QUE FALTAVA) --- */}
         <section className="card">
           <h3>Informações Financeiras</h3>
           <div className="row two">
@@ -248,18 +188,15 @@ const FormCliente: React.FC<{
           </div>
         </section>
 
+        {/* --- AÇÕES --- */}
         <div className="actions">
           {modo === "editar" && (
-            <button type="button" className="btn danger" onClick={() => onCancel(form.id)}>
-              Excluir Cliente
-            </button>
+            <button type="button" className="btn danger" onClick={() => onCancel(form.id)}>Excluir Cliente</button>
           )}
           <button type="button" className="btn primary" onClick={salvar}>
             {modo === "editar" ? "Salvar Alterações" : "Criar Cliente"}
           </button>
-          <button type="button" className="btn ghost" onClick={() => onCancel()}>
-            Cancelar
-          </button>
+          <button type="button" className="btn ghost" onClick={() => onCancel()}>Cancelar</button>
         </div>
       </form>
     </div>
@@ -273,14 +210,12 @@ const ListaClientes: React.FC<{
   onDelete: (c: Cliente) => void;
 }> = ({ clientes, onAdd, onEdit, onDelete }) => {
   const [busca, setBusca] = useState("");
-  const [tipo, setTipo] = useState<TipoCliente | "">("");
-  const [status, setStatus] = useState<StatusCliente | "">("");
+  const [tipo, setTipo] = useState<"PF" | "PJ" | "">("");
+  const [status, setStatus] = useState<"Ativo" | "Inativo" | "">("");
   const [page, setPage] = useState(1);
   const pageSize = 6;
 
-  useEffect(() => {
-    setPage(1);
-  }, [busca, tipo, status]);
+  useEffect(() => { setPage(1); }, [busca, tipo, status]);
 
   const filtrados = useMemo(() => {
     return clientes
@@ -298,37 +233,19 @@ const ListaClientes: React.FC<{
         <h1>Gerenciamento de Clientes</h1>
         <button className="btn primary" onClick={onAdd}>+ Novo Cliente</button>
       </div>
-
       <div className="filters">
-        <input
-          placeholder="Buscar por nome"
-          value={busca}
-          onChange={(e) => setBusca(e.target.value)}
-        />
-
-        <select
-          value={tipo}
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-            setTipo(e.target.value as TipoCliente | "")
-          }
-        >
+        <input placeholder="Buscar por nome" value={busca} onChange={(e) => setBusca(e.target.value)} />
+        <select value={tipo} onChange={(e) => setTipo(e.target.value as "PF" | "PJ" | "")}>
           <option value="">Tipo de Cliente</option>
           <option value="PF">Pessoa Física</option>
           <option value="PJ">Pessoa Jurídica</option>
         </select>
-
-        <select
-          value={status}
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-            setStatus(e.target.value as StatusCliente | "")
-          }
-        >
+        <select value={status} onChange={(e) => setStatus(e.target.value as "Ativo" | "Inativo" | "")}>
           <option value="">Status</option>
           <option value="Ativo">Ativo</option>
           <option value="Inativo">Inativo</option>
         </select>
       </div>
-
       <table className="clients-table">
         <thead>
           <tr>
@@ -345,11 +262,7 @@ const ListaClientes: React.FC<{
             <tr key={c.id}>
               <td>{c.tipo === "PJ" ? c.cnpj : c.cpf}</td>
               <td>{c.nome}</td>
-              <td>
-                <span className={c.status === "Ativo" ? "badge active" : "badge inactive"}>
-                  {c.status}
-                </span>
-              </td>
+              <td><span className={c.status === "Ativo" ? "badge active" : "badge inactive"}>{c.status}</span></td>
               <td>{c.email}</td>
               <td>{c.credito || "-"}</td>
               <td className="actions">
@@ -358,15 +271,9 @@ const ListaClientes: React.FC<{
               </td>
             </tr>
           ))}
-
-          {slice.length === 0 && (
-            <tr>
-              <td colSpan={6} className="empty">Nenhum cliente encontrado.</td>
-            </tr>
-          )}
+          {slice.length === 0 && (<tr><td colSpan={6} className="empty">Nenhum cliente encontrado.</td></tr>)}
         </tbody>
       </table>
-
       <div className="pagination">
         <button disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>« Anterior</button>
         <span>Página {page} de {total}</span>
@@ -379,9 +286,7 @@ const ListaClientes: React.FC<{
 function Sidebar() {
   return (
     <div className="sidebar">
-      <div className="sidebar-logo">
-        <img src={logo} alt="Logo Café" className="logo" />
-      </div>
+      <div className="sidebar-logo"><img src={logo} alt="Logo Café" className="logo" /></div>
       <ul className="sidebar-menu">
         <li><a href="/home">Home</a></li>
         <li><a href="/compras">Compras</a></li>
@@ -394,34 +299,76 @@ function Sidebar() {
   );
 }
 
+// --- COMPONENTE PRINCIPAL (PÁGINA) ---
 export default function Clientes() {
-  const [clientes, setClientes] = useState<Cliente[]>(initialClientes);
+  const [clientes, setClientes] = useState<Cliente[]>([]);
   const [view, setView] = useState<"list" | "new" | "edit">("list");
   const [selected, setSelected] = useState<Cliente | null>(null);
-  const [modal, setModal] = useState<{ isOpen: boolean; cliente: Cliente | null }>({
-    isOpen: false,
-    cliente: null,
-  });
+  const [modal, setModal] = useState<{ isOpen: boolean; cliente: Cliente | null }>({ isOpen: false, cliente: null });
   const [toast, setToast] = useState<{ texto: string; tipo: "sucesso" | "erro" } | null>(null);
+
+  // --- FUNÇÕES DE EFEITO E NOTIFICAÇÃO ---
+  useEffect(() => {
+    async function fetchClients() {
+      try {
+        const response = await getClients();
+        setClientes(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar clientes:", error);
+        notify("Não foi possível carregar os clientes.", "erro");
+      }
+    }
+    fetchClients();
+  }, []);
 
   function notify(texto: string, tipo: "sucesso" | "erro" = "sucesso") {
     setToast({ texto, tipo });
     setTimeout(() => setToast(null), 3000);
   }
 
-  function salvar(c: Cliente) {
-    if (c.id) {
-      setClientes((prev) => prev.map((x) => (x.id === c.id ? c : x)));
-      notify("Cliente atualizado com sucesso!");
-    } else {
-      const novo = { ...c, id: Date.now() };
-      setClientes((prev) => [novo, ...prev]);
-      notify("Cliente criado com sucesso!");
+  // --- FUNÇÕES DE LÓGICA DO CRUD ---
+  async function salvar(c: Cliente) {
+    try {
+      if (c.id) { // MODO EDIÇÃO
+        const response = await updateClient(c.id, c);
+        setClientes((prev) => prev.map((x) => (x.id === c.id ? response.data : x)));
+        notify("Cliente atualizado com sucesso!");
+      } else { 
+    
+        try{
+          const { id, ...clientData } = c;
+        const response = await createClient(clientData);
+        setClientes((prev) => [response.data, ...prev]);
+        notify("Cliente criado com sucesso!");
+        }catch(error){
+          console.error("Erro ao criar cliente:", error);
+          notify("Falha ao criar cliente.", "erro");
+        }
+      }
+      setView("list");
+      setSelected(null);
+    } catch (error) {
+      console.error("Erro ao salvar cliente:", error);
+      notify("Falha ao salvar cliente.", "erro");
     }
-    setView("list");
-    setSelected(null);
   }
 
+  async function confirmarExclusao() {
+    if (!modal.cliente) return;
+    try {
+      await deleteClient(modal.cliente.id);
+      setClientes((prev) => prev.filter((x) => x.id !== modal.cliente!.id));
+      notify("Cliente excluído com sucesso!");
+    } catch (error) {
+      console.error("Erro ao excluir cliente:", error);
+      notify("Falha ao excluir cliente.", "erro");
+    } finally {
+      setModal({ isOpen: false, cliente: null });
+      if (view !== "list") setView("list");
+    }
+  }
+
+  // --- FUNÇÕES DE CONTROLE DE UI ---
   function editar(c: Cliente) {
     setSelected(c);
     setView("edit");
@@ -429,14 +376,6 @@ export default function Clientes() {
 
   function pedirExclusao(c: Cliente) {
     setModal({ isOpen: true, cliente: c });
-  }
-
-  function confirmarExclusao() {
-    if (!modal.cliente) return;
-    setClientes((prev) => prev.filter((x) => x.id !== modal.cliente!.id));
-    setModal({ isOpen: false, cliente: null });
-    notify("Cliente excluído com sucesso!");
-    if (view !== "list") setView("list");
   }
 
   function cancelar(idParaExcluir?: number) {
@@ -449,37 +388,19 @@ export default function Clientes() {
     }
   }
 
+  // --- RENDERIZAÇÃO ---
   return (
     <div className="home-container">
       <Sidebar />
-
       <div className="main-content">
         {toast && <div className={`notification ${toast.tipo}`}>{toast.texto}</div>}
-
         {view === "list" && (
-          <ListaClientes
-            clientes={clientes}
-            onAdd={() => setView("new")}
-            onEdit={editar}
-            onDelete={pedirExclusao}
-          />
+          <ListaClientes clientes={clientes} onAdd={() => setView("new")} onEdit={editar} onDelete={pedirExclusao} />
         )}
-
         {(view === "new" || view === "edit") && (
-          <FormCliente
-            cliente={selected}
-            modo={view === "edit" ? "editar" : "cadastrar"}
-            onSave={salvar}
-            onCancel={cancelar}
-          />
+          <FormCliente cliente={selected} modo={view === "edit" ? "editar" : "cadastrar"} onSave={salvar} onCancel={cancelar} />
         )}
-
-        <ModalConfirmacao
-          isOpen={modal.isOpen}
-          onClose={() => setModal({ isOpen: false, cliente: null })}
-          onConfirm={confirmarExclusao}
-          cliente={modal.cliente}
-        />
+        <ModalConfirmacao isOpen={modal.isOpen} onClose={() => setModal({ isOpen: false, cliente: null })} onConfirm={confirmarExclusao} cliente={modal.cliente} />
       </div>
     </div>
   );
